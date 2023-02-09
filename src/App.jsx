@@ -1,12 +1,13 @@
+import { AppContainer } from './assets/styles';
 import GlobalStyle from './globalStyle';
 import LandingPage from './pages/LandingPage';
 
 function App() {
   return (
-    <div>
+    <AppContainer>
       <GlobalStyle />
       <LandingPage />
-    </div>
+    </AppContainer>
   );
 }
 
