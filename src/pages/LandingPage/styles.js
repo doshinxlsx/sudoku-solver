@@ -86,3 +86,24 @@ export const EmailSubmitButton = styled.button`
     cursor: pointer;
   }
 `;
+
+export const PlayButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+`;
+
+export const PlayButton = styled.button`
+  width: 100px;
+  padding: 10px;
+  background: #51e2f5;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;

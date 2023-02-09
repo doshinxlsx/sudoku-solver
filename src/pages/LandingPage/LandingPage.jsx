@@ -8,12 +8,15 @@ import {
   EmailSubmitButton,
   EmailTitle,
   LandingPageContainer,
+  PlayButton,
+  PlayButtonContainer,
   Title,
   TitleContainer,
 } from './styles';
 
 const LandingPage = () => {
-  const handleFakeApiCall = () => {
+  const handleFakeApiCall = (event) => {
+    event.preventDefault();
     const timer = setTimeout(() => {
       alert('You have successfully subscribed to our email list!');
     }, 3000);
@@ -42,6 +45,10 @@ const LandingPage = () => {
           </EmailSubmitButton>
         </EmailForm>
       </EmailFormContainer>
+
+      <PlayButtonContainer>
+        <PlayButton>Play game</PlayButton>
+      </PlayButtonContainer>
     </LandingPageContainer>
   );
 };
