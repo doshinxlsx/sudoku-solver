@@ -10,11 +10,7 @@ import {
 } from './styles';
 
 const PlayGround = () => {
-  const [grid, setGrid] = useState(
-    Array(9)
-      .fill()
-      .map(() => Array(9).fill(0)),
-  );
+  const [grid, setGrid] = useState(emptyGrid());
 
   const handleChange = (event, rowIndex, columnIndex) => {
     const updatedGrid = [...grid];
@@ -31,8 +27,15 @@ const PlayGround = () => {
   };
 
   const solve = () => {
-    const solution = solveSudoku(grid);
-    setGrid(solution);
+    if (!isSolvable(grid)) {
+      alert('Invalid or unsolvable puzzle.');
+      return;
+    }
+
+    let solvedGrid = [...grid];
+    isSolvable(solvedGrid);
+
+    setGrid(solvedGrid);
   };
 
   const solveSudoku = (grid) => {
@@ -70,6 +73,28 @@ const PlayGround = () => {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (grid[rowStart + i][columnStart + j] === number) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+
+  const isSolvable = (grid) => {
+    for (let row = 0; row < 9; row++) {
+      for (let column = 0; column < 9; column++) {
+        if (grid[row][column] === 0) {
+          for (let number = 1; number <= 9; number++) {
+            if (isValid(grid, row, column, number)) {
+              grid[row][column] = number;
+
+              if (isSolvable(grid)) {
+                return true;
+              } else {
+                grid[row][column] = 0;
+              }
+            }
+          }
           return false;
         }
       }
