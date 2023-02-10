@@ -43,7 +43,6 @@ const PlayGround = () => {
   };
 
   const solve = () => {
-    console.log('solve function clicked');
     const solvedGrid = [...grid];
     const isSolved = solveSudoku(solvedGrid);
     if (isSolved) {
