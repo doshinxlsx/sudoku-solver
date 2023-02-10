@@ -9,6 +9,18 @@ import {
   SolveButton,
 } from './styles';
 
+const emptyGrid = () => {
+  let grid = [];
+  for (let i = 0; i < 9; i++) {
+    let row = [];
+    for (let j = 0; j < 9; j++) {
+      row.push('');
+    }
+    grid.push(row);
+  }
+  return grid;
+};
+
 const PlayGround = () => {
   const [grid, setGrid] = useState(emptyGrid());
 
@@ -27,6 +39,22 @@ const PlayGround = () => {
   };
 
   const solve = () => {
+    let isEmpty = true;
+
+    for (let i = 0; i < 9; i++) {
+      for (let j = 0; j < 9; j++) {
+        if (grid[i][j] !== '') {
+          isEmpty = false;
+          break;
+        }
+      }
+    }
+
+    if (isEmpty) {
+      alert('Please fill in the numbers.');
+      return;
+    }
+
     if (!isSolvable(grid)) {
       alert('Invalid or unsolvable puzzle.');
       return;
@@ -116,6 +144,8 @@ const PlayGround = () => {
                     value={grid[rowIndex][columnIndex] || ''}
                     onChange={(e) => handleChange(e, rowIndex, columnIndex)}
                     onKeyPress={handleKeyPress}
+                    columnIndex={columnIndex}
+                    rowIndex={rowIndex}
                   />
                 </GameTableData>
               ))}
