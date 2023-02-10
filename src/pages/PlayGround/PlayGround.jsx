@@ -14,7 +14,7 @@ const emptyGrid = () => {
   for (let i = 0; i < 9; i++) {
     let row = [];
     for (let j = 0; j < 9; j++) {
-      row.push('');
+      row.push(0);
     }
     grid.push(row);
   }
@@ -25,9 +25,13 @@ const PlayGround = () => {
   const [grid, setGrid] = useState(emptyGrid());
 
   const handleChange = (event, rowIndex, columnIndex) => {
-    const updatedGrid = [...grid];
-    updatedGrid[rowIndex][columnIndex] = event.target.value;
-    setGrid(updatedGrid);
+    const number = parseInt(event.target.value, 10);
+
+    if (number >= 1 && number <= 9 && isValid(grid, rowIndex, columnIndex, number)) {
+      const updatedGrid = [...grid];
+      updatedGrid[rowIndex][columnIndex] = number;
+      setGrid(updatedGrid);
+    }
   };
 
   const handleKeyPress = (event) => {
@@ -39,45 +43,28 @@ const PlayGround = () => {
   };
 
   const solve = () => {
-    let isEmpty = true;
-
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        if (grid[i][j] !== '') {
-          isEmpty = false;
-          break;
-        }
-      }
+    console.log('solve function clicked');
+    const solvedGrid = [...grid];
+    const isSolved = solveSudoku(solvedGrid);
+    if (isSolved) {
+      setGrid(solvedGrid);
+      alert('Sudoku successfully solved!');
+    } else {
+      alert('Invalid or unsolvable grid');
     }
-
-    if (isEmpty) {
-      alert('Please fill in the numbers.');
-      return;
-    }
-
-    if (!isSolvable(grid)) {
-      alert('Invalid or unsolvable puzzle.');
-      return;
-    }
-
-    let solvedGrid = [...grid];
-    isSolvable(solvedGrid);
-
-    setGrid(solvedGrid);
   };
 
   const solveSudoku = (grid) => {
-    for (let i = 0; i < 9; i++) {
-      for (let j = 0; j < 9; j++) {
-        if (grid[i][j] === 0) {
-          for (let k = 1; k <= 9; k++) {
-            if (isValid(grid, i, j, k)) {
-              grid[i][j] = k;
-
+    for (let rowIndex = 0; rowIndex < 9; rowIndex++) {
+      for (let columnIndex = 0; columnIndex < 9; columnIndex++) {
+        if (grid[rowIndex][columnIndex] === 0) {
+          for (let number = 1; number <= 9; number++) {
+            if (isValid(grid, rowIndex, columnIndex, number)) {
+              grid[rowIndex][columnIndex] = number;
               if (solveSudoku(grid)) {
-                return grid;
+                return true;
               } else {
-                grid[i][j] = 0;
+                grid[rowIndex][columnIndex] = 0;
               }
             }
           }
@@ -85,7 +72,7 @@ const PlayGround = () => {
         }
       }
     }
-    return grid;
+    return true;
   };
 
   const isValid = (grid, row, column, number) => {
