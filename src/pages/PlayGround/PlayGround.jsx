@@ -58,7 +58,7 @@ const PlayGround = () => {
         alert('Invalid or unsolvable grid');
       }
       clearTimeout(timer);
-    }, 2500);
+    }, 100);
   };
 
   const solveSudoku = (grid) => {
