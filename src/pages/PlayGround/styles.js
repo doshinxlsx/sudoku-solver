@@ -30,4 +30,20 @@ export const CellInput = styled.input`
   ${(props) => (props.rowIndex + 1) % 3 === 0 && `border-bottom: 3px solid black;`}
 `;
 
-export const SolveButton = styled.button``;
+export const SolveButton = styled.button`
+  border: 1px solid #9df9ef;
+  background: #9df9ef;
+  width: 100%;
+  height: 35px;
+  border-radius: 6px;
+  font-weight: 600;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 100px;
+  }
+`;
