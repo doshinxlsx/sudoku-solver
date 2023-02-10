@@ -23,6 +23,7 @@ const emptyGrid = () => {
 
 const PlayGround = () => {
   const [grid, setGrid] = useState(emptyGrid());
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (event, rowIndex, columnIndex) => {
     const number = parseInt(event.target.value, 10);
@@ -43,14 +44,20 @@ const PlayGround = () => {
   };
 
   const solve = () => {
+    setLoading(true);
     const solvedGrid = [...grid];
     const isSolved = solveSudoku(solvedGrid);
-    if (isSolved) {
-      setGrid(solvedGrid);
-      alert('Sudoku successfully solved!');
-    } else {
-      alert('Invalid or unsolvable grid');
-    }
+
+    const timer = setTimeout(() => {
+      if (isSolved) {
+        setGrid(solvedGrid);
+        setLoading(false);
+        alert('Sudoku successfully solved!');
+      } else {
+        alert('Invalid or unsolvable grid');
+      }
+      clearTimeout(timer);
+    }, 2500);
   };
 
   const solveSudoku = (grid) => {
@@ -139,7 +146,7 @@ const PlayGround = () => {
           ))}
         </GameTableBody>
       </GameTable>
-      <SolveButton onClick={solve}>Solve</SolveButton>
+      <SolveButton onClick={solve}>{loading ? <Spinner /> : 'Solve'}</SolveButton>
     </PageContainer>
   );
 };
