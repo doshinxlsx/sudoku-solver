@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Spinner } from './components';
 import {
   CellInput,
   GameTable,
