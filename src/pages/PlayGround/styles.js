@@ -4,13 +4,19 @@ export const PageContainer = styled.div`
   display: flex;
 `;
 
-export const GameTable = styled.table``;
+export const GameTable = styled.table`
+  border-collapse: collapse;
+  border: 3px solid #51e2f5;
+  background-color: #51e2f5;
+`;
 
 export const GameTableBody = styled.tbody``;
 
 export const GameTableRow = styled.tr``;
 
-export const GameTableData = styled.td``;
+export const GameTableData = styled.td`
+  padding: 0;
+`;
 
 export const CellInput = styled.input`
   width: 50px;
