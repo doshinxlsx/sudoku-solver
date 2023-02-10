@@ -1,14 +1,26 @@
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { AppContainer } from './assets/styles';
+import { LandingPage, PlayGround } from './pages';
 import GlobalStyle from './globalStyle';
-import LandingPage from './pages/LandingPage';
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <LandingPage />,
+  },
+  {
+    path: '/playground',
+    element: <PlayGround />,
+  },
+]);
+
+const App = () => {
   return (
     <AppContainer>
       <GlobalStyle />
-      <LandingPage />
+      <RouterProvider router={router} />
     </AppContainer>
   );
-}
+};
 
 export default App;

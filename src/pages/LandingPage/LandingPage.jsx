@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useLandingPage from './hooks/useLandingPage';
 import {
   Description,
   DescriptionContainer,
@@ -15,13 +17,7 @@ import {
 } from './styles';
 
 const LandingPage = () => {
-  const handleFakeApiCall = (event) => {
-    event.preventDefault();
-    const timer = setTimeout(() => {
-      alert('You have successfully subscribed to our email list!');
-    }, 3000);
-    return () => clearTimeout(timer);
-  };
+  const { handleFakeApiCall, handleNavigate } = useLandingPage();
 
   return (
     <LandingPageContainer>
@@ -47,7 +43,7 @@ const LandingPage = () => {
       </EmailFormContainer>
 
       <PlayButtonContainer>
-        <PlayButton>Play game</PlayButton>
+        <PlayButton onClick={handleNavigate}>Play game</PlayButton>
       </PlayButtonContainer>
     </LandingPageContainer>
   );
