@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from './components';
 import {
   CellInput,
@@ -27,6 +27,22 @@ const PlayGround = () => {
   const [loading, setLoading] = useState(false);
   const [userDefined, setUserDefined] = useState([]);
 
+  useEffect(() => {
+    const storedGrid = JSON.parse(localStorage.getItem('grid')) || [];
+    const storedUserDefined = JSON.parse(localStorage.getItem('userDefined')) || [];
+
+    if (storedGrid.length > 0 && storedUserDefined.length > 0) {
+      setGrid(storedGrid);
+      setUserDefined(storedUserDefined);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('Grid saved');
+    localStorage.setItem('grid', JSON.stringify(grid));
+    localStorage.setItem('userDefined', JSON.stringify(userDefined));
+  }, [grid, userDefined]);
+
   const handleChange = (event, rowIndex, columnIndex) => {
     const number = parseInt(event.target.value, 10);
 
@@ -49,6 +65,11 @@ const PlayGround = () => {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       event.preventDefault();
     }
+  };
+
+  const resetGrid = () => {
+    setGrid(emptyGrid());
+    setUserDefined([]);
   };
 
   const solve = () => {
@@ -161,6 +182,7 @@ const PlayGround = () => {
         </GameTableBody>
       </GameTable>
       <SolveButton onClick={solve}>{loading ? <Spinner /> : 'Solve'}</SolveButton>
+      <button onClick={resetGrid}>reset</button>
     </PageContainer>
   );
 };
