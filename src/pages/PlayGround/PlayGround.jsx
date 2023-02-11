@@ -83,6 +83,7 @@ const PlayGround = () => {
         setLoading(false);
         alert('Sudoku successfully solved!');
       } else {
+        setLoading(false);
         alert('Invalid or unsolvable grid');
       }
       clearTimeout(timer);
