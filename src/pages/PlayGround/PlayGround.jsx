@@ -25,6 +25,7 @@ const emptyGrid = () => {
 const PlayGround = () => {
   const [grid, setGrid] = useState(emptyGrid());
   const [loading, setLoading] = useState(false);
+  const [userDefined, setUserDefined] = useState([]);
 
   const handleChange = (event, rowIndex, columnIndex) => {
     const number = parseInt(event.target.value, 10);
@@ -33,6 +34,12 @@ const PlayGround = () => {
       const updatedGrid = [...grid];
       updatedGrid[rowIndex][columnIndex] = number;
       setGrid(updatedGrid);
+
+      const index = rowIndex * 9 + columnIndex;
+
+      if (!userDefined.includes(index)) {
+        setUserDefined([...userDefined, index]);
+      }
     }
   };
 
@@ -130,19 +137,25 @@ const PlayGround = () => {
         <GameTableBody>
           {grid.map((row, rowIndex) => (
             <GameTableRow key={rowIndex}>
-              {row.map((column, columnIndex) => (
-                <GameTableData key={columnIndex}>
-                  <CellInput
-                    type='text'
-                    maxLength='1'
-                    value={grid[rowIndex][columnIndex] || ''}
-                    onChange={(e) => handleChange(e, rowIndex, columnIndex)}
-                    onKeyPress={handleKeyPress}
-                    columnIndex={columnIndex}
-                    rowIndex={rowIndex}
-                  />
-                </GameTableData>
-              ))}
+              {row.map((column, columnIndex) => {
+                const index = rowIndex * 9 + columnIndex;
+                const isUserDefined = userDefined.includes(index);
+
+                return (
+                  <GameTableData key={columnIndex}>
+                    <CellInput
+                      type='text'
+                      maxLength='1'
+                      value={grid[rowIndex][columnIndex] || ''}
+                      onChange={(e) => handleChange(e, rowIndex, columnIndex)}
+                      onKeyPress={handleKeyPress}
+                      columnIndex={columnIndex}
+                      rowIndex={rowIndex}
+                      isUserDefined={isUserDefined}
+                    />
+                  </GameTableData>
+                );
+              })}
             </GameTableRow>
           ))}
         </GameTableBody>

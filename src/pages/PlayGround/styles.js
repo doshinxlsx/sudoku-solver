@@ -8,7 +8,6 @@ export const PageContainer = styled.div`
 export const GameTable = styled.table`
   border-collapse: collapse;
   border: 3px solid #51e2f5;
-  background-color: #51e2f5;
   margin: 0 0 15px 0;
 `;
 
@@ -26,8 +25,9 @@ export const CellInput = styled.input`
   font-size: 20px;
   text-align: center;
   border: 1px solid black;
-  ${(props) => (props.columnIndex + 1) % 3 === 0 && `border-right: 3px solid black;`}
-  ${(props) => (props.rowIndex + 1) % 3 === 0 && `border-bottom: 3px solid black;`}
+  background-color: ${(props) => (props.isUserDefined ? '#9df9ef' : 'white')};
+  ${(props) => (props.columnIndex + 1) % 3 === 0 && `border-right: 3px solid black;`};
+  ${(props) => (props.rowIndex + 1) % 3 === 0 && `border-bottom: 3px solid black;`};
 `;
 
 export const SolveButton = styled.button`
