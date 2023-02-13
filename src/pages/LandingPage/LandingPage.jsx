@@ -1,5 +1,5 @@
 import React from 'react';
-import useLandingPage from './hooks';
+import { useLandingPage } from './hooks';
 import {
   Description,
   DescriptionContainer,
