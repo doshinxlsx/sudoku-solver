@@ -1,6 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import useLandingPage from './hooks/useLandingPage';
+import useLandingPage from './hooks';
 import {
   Description,
   DescriptionContainer,
