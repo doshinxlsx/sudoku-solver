@@ -2,6 +2,7 @@ import React from 'react';
 import { Spinner } from './components';
 import { usePlayGround } from './hooks';
 import {
+  ButtonContainer,
   CellInput,
   GameTable,
   GameTableBody,
@@ -9,6 +10,8 @@ import {
   GameTableRow,
   PageContainer,
   SolveButton,
+  ResetButton,
+  GameTitle,
 } from './styles';
 
 const PlayGround = () => {
@@ -17,6 +20,7 @@ const PlayGround = () => {
 
   return (
     <PageContainer>
+      <GameTitle>Sudoku Solver</GameTitle>
       <GameTable>
         <GameTableBody>
           {grid.map((row, rowIndex) => (
@@ -44,8 +48,10 @@ const PlayGround = () => {
           ))}
         </GameTableBody>
       </GameTable>
-      <SolveButton onClick={solve}>{loading ? <Spinner /> : 'Solve'}</SolveButton>
-      <button onClick={resetGrid}>reset</button>
+      <ButtonContainer>
+        <SolveButton onClick={solve}>{loading ? <Spinner /> : 'Solve'}</SolveButton>
+        <ResetButton onClick={resetGrid}>Reset</ResetButton>
+      </ButtonContainer>
     </PageContainer>
   );
 };
