@@ -6,5 +6,5 @@ export const AppContainer = styled.div`
   align-items: center;
   height: 100vh;
   width: 100%;
-  background: #a28089;
+  background: linear-gradient(to bottom, #b993d6, #8ca6db);
 `;
