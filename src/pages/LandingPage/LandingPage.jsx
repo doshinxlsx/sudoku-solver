@@ -8,15 +8,18 @@ import {
   EmailInput,
   EmailSubmitButton,
   EmailTitle,
+  ErrorMessage,
   LandingPageContainer,
   PlayButton,
   PlayButtonContainer,
+  SuccessMessage,
   Title,
   TitleContainer,
 } from './styles';
 
 const LandingPage = () => {
-  const { handleFakeApiCall, handleNavigate } = useLandingPage();
+  const { handleFakeApiCall, handleNavigate, errorMsg, successMsg, formValue, onChangeInput } =
+    useLandingPage();
 
   return (
     <LandingPageContainer>
@@ -37,13 +40,19 @@ const LandingPage = () => {
       <EmailFormContainer>
         <EmailTitle>Subscribe to our email list!</EmailTitle>
 
-        <EmailForm>
-          <EmailInput type='email' name='email' placeholder='Type your email here..' />
-          <EmailSubmitButton type='submit' onClick={handleFakeApiCall}>
-            Subscribe
-          </EmailSubmitButton>
+        <EmailForm onSubmit={handleFakeApiCall}>
+          <EmailInput
+            type='email'
+            name='email'
+            value={formValue.email}
+            onChange={onChangeInput}
+            placeholder='Type your email here..'
+          />
+          <EmailSubmitButton type='submit'>Subscribe</EmailSubmitButton>
         </EmailForm>
       </EmailFormContainer>
+      {successMsg && <SuccessMessage>{successMsg}</SuccessMessage>}
+      {errorMsg && <ErrorMessage>{errorMsg}</ErrorMessage>}
 
       <PlayButtonContainer>
         <PlayButton onClick={handleNavigate}>Play a Game</PlayButton>

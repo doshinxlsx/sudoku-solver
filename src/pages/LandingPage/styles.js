@@ -138,3 +138,25 @@ export const PlayButton = styled.button`
     width: 300px;
   }
 `;
+
+export const SuccessMessage = styled.p`
+  font-weight: 600;
+  color: #3cb371;
+  font-size: 12px;
+  margin-left: 15px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  font-weight: 600;
+  color: #dc143c;
+  font-size: 12px;
+  margin-left: 15px;
+
+  @media screen and (min-width: 768px) {
+    font-size: 16px;
+  }
+`;
