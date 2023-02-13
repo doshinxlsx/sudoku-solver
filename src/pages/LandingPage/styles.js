@@ -3,9 +3,10 @@ import styled from 'styled-components';
 export const LandingPageContainer = styled.div`
   display: flex;
   border-radius: 6px;
-  background: #edf7f6;
+  background: rgba(255, 255, 255, 1);
   width: 100%;
   flex-direction: column;
+  padding: 15px;
 
   @media screen and (min-width: 768px) {
     width: 600px;
@@ -20,7 +21,7 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 16px;
+  font-size: 18px;
 
   @media screen and (min-width: 768px) {
     font-size: 24px;
@@ -33,10 +34,11 @@ export const DescriptionContainer = styled.div`
 `;
 
 export const Description = styled.p`
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 600;
 
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 
@@ -44,30 +46,54 @@ export const EmailFormContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 15px;
+  padding: 5px;
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+  }
 `;
 
 export const EmailTitle = styled.h2`
   font-size: 18px;
   margin: 0 0 15px 0;
+  text-align: center;
 
   @media screen and (min-width: 768px) {
     font-size: 20px;
+    text-align: left;
   }
 `;
 
 export const EmailForm = styled.form`
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 35px;
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
+  }
 `;
 
 export const EmailInput = styled.input`
-  display: flex;
   width: 100%;
+  height: 35px;
   background: transparent;
-  border: 1px solid #a28089;
+  border: none;
+  border-bottom: 1px solid black;
   border-radius: 6px;
-  padding: 5px;
   margin: 0 0 10px 0;
+  padding: 0 0 0 15px;
+  position: relative;
+  font-weight: 600;
+
+  &::placeholder {
+    color: black;
+    font-weight: 600;
+  }
+
+  &:focus {
+    outline: none;
+  }
 
   @media screen and (min-width: 768px) {
     width: 300px;
@@ -76,11 +102,13 @@ export const EmailInput = styled.input`
 
 export const EmailSubmitButton = styled.button`
   width: 100px;
-  padding: 5px;
-  background: #7cf7de;
+  height: 35px;
+  background: transparent;
   border: none;
-  border-radius: 6px;
   font-weight: 600;
+  position: absolute;
+  top: 1.5px;
+  right: -5px;
 
   &:hover {
     cursor: pointer;
@@ -94,16 +122,19 @@ export const PlayButtonContainer = styled.div`
 `;
 
 export const PlayButton = styled.button`
-  width: 100px;
-  padding: 10px;
-  background: #51e2f5;
+  width: 50%;
+  padding: 15px;
+  background: #7cf7de;
   border: none;
   border-radius: 6px;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
 
   &:hover {
     cursor: pointer;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -15px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 300px;
   }
 `;
